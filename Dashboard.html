@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video KYC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #9cc3d5ff;
+    }
+  
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left; /* Left align content within the container */
+    }
+  
+    h1, h2 {
+      color: #333;
+    }
+  
+    .section {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    input[type="text"],
+    input[type="date"],
+    select {
+      width: 97%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  
+    .start-btn {
+      display: inline-block; /* Change to inline-block to center horizontally */
+      width: auto; /* Set width to auto */
+      padding: 10px 20px; /* Add padding */
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center; /* Center align text */
+      text-decoration: none; /* Remove underline */
+    }
+  
+    .start-btn:hover {
+      background-color: #0056b3;
+    }
+  
+    .learn-more, .faq {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 10px;
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+  
+    .learn-more:hover, .faq:hover {
+      color: #0056b3;
+    }
+  </style>
+  <script>
+   function handleKeyPress(event) {
+      if (event.keyCode === 13) { // 13 is the keycode for Enter key
+        var activeElement = document.activeElement;
+        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT') {
+          var inputs = document.querySelectorAll('input, select');
+          var index = Array.prototype.indexOf.call(inputs, activeElement);
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        }
+      }
+    }
+    
+    function handleNameInput() {
+      var nameInput = document.getElementById("name");
+      var nameValue = nameInput.value;
+      var namePattern = /^[A-Za-z]+$/;
+      var errorDiv = document.getElementById("name-error");
+      
+      if (!namePattern.test(nameValue)) {
+        if (errorDiv) {
+          errorDiv.innerText = "Alphabets only";
+          errorDiv.style.fontSize = "12px"; // Reduce font size
+          nameInput.parentNode.insertBefore(errorDiv, nameInput); // Move error message above the input
+        }
+      } else {
+        if (errorDiv) {
+          errorDiv.innerText = "";
+        }
+      }
+    }
+    
+    function handlePanInput() {
+      var panInput = document.getElementById("pan");
+      var panValue = panInput.value;
+      var panPattern = /^[A-Za-z]{5}\d{4}[A-Za-z]$/; // PAN pattern
+      var errorDiv = document.getElementById("pan-error");
+      
+      if (!panPattern.test(panValue)) {
+        errorDiv.innerText = "PAN card number should consist of 10 characters with the specified format.";
+        panInput.focus();
+      } else {
+        errorDiv.innerText = "";
+      }
+    }
+
+    function handleAadharInput() {
+      var aadharInput = document.getElementById("aadhar");
+      var aadharValue = aadharInput.value;
+      var aadharPattern = /^\d{12}$/; // Aadhar number pattern
+      var errorDiv = document.getElementById("aadhar-error");
+
+      if (!aadharPattern.test(aadharValue)) {
+        errorDiv.innerText = "Aadhar number should consist of 12 digits.";
+        aadharInput.focus();
+      } else {
+        errorDiv.innerText = "";
+      }
+    }
+  </script>
+</head>
+<body onkeypress="handleKeyPress(event)">
+  <img src="Hashira's bank Logo.png" width="133px" alt="Hashira's Bank Logo">
+  <div class="container">
+    <h1>Welcome to Video KYC</h1>
+    <p>Verify Your Identity Quickly and Securely</p>
+
+    <div class="section">
+      <h2>Basic Details:</h2>
+      <form>
+        <label for="name">Name:</label>
+        <div id="name-error"></div> <!-- Error message moved above the input -->
+        <input type="text" id="name" name="name" required oninput="handleNameInput()">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="pan">PAN Card Number:</label>
+        <input type="text" id="pan" name="pan" required oninput="handlePanInput()">
+        <div id="pan-error" style="color: red;"></div> <!-- Error message container for PAN input -->
+        
+        <label for="aadhar">Aadhar Number:</label>
+        <input type="text" id="aadhar" name="aadhar" required oninput="handleAadharInput()">
+        <div id="aadhar-error" style="color: red;"></div> <!-- Error message container for Aadhar input -->
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Financial Information:</h2>
+      <form>
+        <label for="income">Income Range:</label>
+        <select id="income" name="income">
+          <option value="<10k">Less than ₹5,00,000</option>
+          <option value="10k-30k">₹5,00,000 - ₹10,00,000</option>
+          <option value="30k-50k">₹10,00,000- ₹20,00,000</option>
+          <option value=">50k">Over ₹20,00,000</option>
+        </select>
+
+        <label for="occupation">Occupation:</label>
+        <select id="occupation" name="occupation">
+          <option value="employed">Employed</option>
+          <option value="self-employed">Self-Employed</option>
+          <option value="student">Student</option>
+          <option value="retired">Retired</option>
+          <option value="other">Other</option>
+        </select>
+      </form>
+    </div>
+
+    <a class="start-btn" href="http://127.0.0.1:5500/Video_kyc.html">Start Video KYC</a>
+  </div>
+  <script type="module" src="index.js"></script>
+</body>
+</html>

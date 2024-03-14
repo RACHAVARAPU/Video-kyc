@@ -1,0 +1,17 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Card Scanner</title>
+  <link rel="stylesheet" href="Videokyc.css">
+</head>
+<body>
+  <video id="video" width="640" height="480" autoplay></video>
+  <button onclick="captureAndScan()">Capture & Scan Card</button>
+  <div id="cardDetails"></div>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
+  <script src="Videokyc.js"></script>
+</body>
+</html>

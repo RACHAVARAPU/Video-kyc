@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #9cc3d5ff;
+    }
+
+    .logo {
+        display: grid;
+        place-items: center;
+    }
+
+    #login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #login-container input[type="text"],
+    #login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    #login-container button{
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div id="login-container">
+    <div class="logo">
+        <img src = "Hashira's bank Logo.png" width="133px">
+    </div>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" name="username">
+        <span id="usernameError" class="error"></span> <!-- New span for username error -->
+        <input type="password" id="password" placeholder="Password" name="password">
+        <span id="passwordError" class="error"></span> <!-- New span for password error -->
+        <button>Login</button>
+    </form>
+</div>
+
+<script type="module" src="index.js"></script>
+</body>
+</html>

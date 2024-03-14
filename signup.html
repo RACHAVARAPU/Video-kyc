@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Hashiras</title>
+<link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">
+  <img src = "Hashira's bank Logo.png" width="133px">
+  </div>
+  <h1>Welcome to Hashira's Bank</h1>
+  <p><em>Please <b>Register</b> to proceed...</em></p>
+  <form id="signupForm" >
+    <label for="userName">Username*</label>
+    <input type="text" id="userName" name="username" required>
+    <div class="error" id="userNameError"></div>
+    <label for="emailOrPhone">Email or Phone*</label>
+    <input type="text" id="emailOrPhone" name="email" required>
+    <div class="error" id="emailOrPhoneError"></div>
+    <label for="password">Password*</label>
+    <input type="password" id="password" name="password" required>
+    <div class="error" id="passwordError"></div>
+    <label for="confirmPassword">Confirm Password*</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <div class="error" id="confirmPasswordError"></div>
+    <input type="checkbox" id="agreeTerms" name="agreeTerms" >
+    <label for="agreeTerms">I agree to the terms and conditions</label>
+    <div class="error" id="termsError"></div>
+    <button type="submit">Register</button>
+    <div id="loginLink">Already have an account? <a href="login.html">Login</a></div>
+  </form>
+</div>
+
+<script type="module" src="index.js">
+  
+</script>
+</body>
+</html>
