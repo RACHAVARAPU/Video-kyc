@@ -1,40 +1,48 @@
-// script.js
-const videoElement = document.getElementById('video');
-const cardDetailsElement = document.getElementById('cardDetails');
-let stream = null;
+import os
+import cv2
+import pytesseract
+from PIL import Image
 
-async function startCamera() {
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    videoElement.srcObject = stream;
-  } catch (err) {
-    console.error('Error accessing camera:', err);
-  }
-}
+# Set Tesseract executable path if not in PATH
+tesseract_path = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Adjust this path as per your system
+if not os.path.exists(tesseract_path):
+    raise Exception("Tesseract executable not found at the specified path:", tesseract_path)
+pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
-function stopCamera() {
-  if (stream) {
-    const tracks = stream.getTracks();
-    tracks.forEach(track => track.stop());
-  }
-}
+# Function to capture image from webcam
+def capture_image():
+    # Open webcam
+    cap = cv2.VideoCapture(0)
 
-async function captureAndScan() {
-  const canvas = document.createElement('canvas');
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-  canvas.getContext('2d').drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    while True:
+        # Capture frame from webcam
+        ret, frame = cap.read()
 
-  const image = new Image();
-  image.src = canvas.toDataURL();
+        # Display the frame
+        cv2.imshow('Webcam', frame)
 
-  Tesseract.recognize(
-    image,
-    'eng',
-    { logger: m => console.log(m) }
-  ).then(({ data: { text } }) => {
-    cardDetailsElement.textContent = text;
-  });
-}
+        # Check for key press (press 'c' to capture)
+        if cv2.waitKey(1) & 0xFF == ord('c'):
+            break
 
-startCamera();
+    # Release webcam and destroy OpenCV windows
+    cap.release()
+    cv2.destroyAllWindows()
+
+    # Convert frame to grayscale
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Convert frame to PIL Image
+    pil_img = Image.fromarray(gray)
+
+    return pil_img
+
+# Capture image from webcam
+img = capture_image()
+
+# Perform OCR using Tesseract
+extracted_text = pytesseract.image_to_string(img)
+
+# Print the extracted text
+print("Extracted Text:")
+print(extracted_text)
